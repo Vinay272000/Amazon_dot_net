@@ -16,10 +16,10 @@ namespace AmazonClone.Controllers
             _CatogoryService= categoryService;
         }
 
+        //trdfytctittut
         public async Task<IActionResult> Get() {
             return Ok(await _CatogoryService.Get());
         }
-
         public async Task<IActionResult> Post(int categoryId, string categoryName)
         {
             await _CatogoryService.create(categoryId, categoryName);
