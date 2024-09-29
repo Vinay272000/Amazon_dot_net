@@ -36,15 +36,14 @@ namespace AmazonClone.Controllers
             return category != null ? Ok(category) : BadRequest();
         }
 
-        [HttpPost]
-        [Route("create")]
-        public async Task<IActionResult> create([FromBody]CategoryVM categoryVM)
-        {
-            //mapping
-            Category category = _Imapper.Map<Category>(categoryVM);
-            bool isCreated = await _CatogoryService.create(category);
-            return isCreated ? Ok(new {message = true}): BadRequest();
-        }
+        //[HttpPost]
+        //[Route("create")]
+        //public async Task<IActionResult> create([FromBody]CategoryVM categoryVM)
+        //{
+        //    Category category = _Imapper.Map<Category>(categoryVM);
+        //    bool isCreated = await _CatogoryService.create(category);
+        //    return isCreated ? Ok(new {message = true}): BadRequest();
+        //}
 
         [HttpGet]
         [Route("delete")]
