@@ -21,6 +21,8 @@ namespace AmazonClone.Controllers
             _Imapper = Imapper;
         }
 
+        // kiskore
+
         [HttpGet]
         [Route("get")]
         public async Task<IActionResult> Get() {
