@@ -9,11 +9,11 @@ namespace AmazonClone.Services
 
         Task<Category> GetById(int id);
 
-        Task<IActionResult> DeleteById(int id);
+        Task<bool> DeleteById(int id);
 
-        Task<IActionResult> Update(Category category);
+        Task<bool> Update(Category category);
 
-        Task<IActionResult> create(int categoryId, string categoryName);
+        Task<bool> create(Category category);
 
     }
 }

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "b1gF/FdyfbvqYcq37XDXzlo/LCIApNbS/nRKWBU8XOQnbXMfgTOkcZqEc51Oc/0B9Bi2DXfd9zoTG0YVqd9hpw==",
+  "dgSpecHash": "CuNebjeGLZNP8c7y/2JCD/Rk8XSFikan/2Gwa5it+zrfcsBrYNDHUlillWpIQryAbbUAvGyWDLmd70Ok1i+E0A==",
   "success": true,
   "projectFilePath": "D:\\Amazon\\AmazonClone\\AmazonClone\\AmazonClone.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mvk99\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\mvk99\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mvk99\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\mvk99\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

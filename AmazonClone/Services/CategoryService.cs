@@ -9,33 +9,46 @@ namespace AmazonClone.Services
     public class CategoryService : ICategoryService
     {
         public AmazonDbContext _AmazonDbContext;
-        public CategoryService(AmazonDbContext amazonDbContext) {
-            _AmazonDbContext= amazonDbContext;
+        public ILogger<CategoryService> _log;
+        public CategoryService(AmazonDbContext amazonDbContext, ILogger<CategoryService> log)
+        {
+            _AmazonDbContext = amazonDbContext;
+            _log = log;
         }
 
-        public async Task<IActionResult> create(int categoryId, string categoryName)
+        public async Task<bool> create(Category category)
         {
             try
             {
-                _AmazonDbContext.categories?.Add(new Category { CategoryId = categoryId, CategoryName = categoryName});
-                await _AmazonDbContext.SaveChangesAsync();
-                return Ok(new { Message = "Category created successfully" });
+                _AmazonDbContext.categories?.Add(category);
+                int entries = await _AmazonDbContext.SaveChangesAsync();
+                return entries > 0;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                throw new NotImplementedException();
+                _log.LogError(ex, $"create({category})");
+                return false;
             }
         }
 
-        public async Task<IActionResult> DeleteById(int id)
+        public async Task<bool> DeleteById(int id)
         {
             try
             {
-                _AmazonDbContext.categories?.Remove(_AmazonDbContext.categories.Find(id));
-                await _AmazonDbContext.SaveChangesAsync();
-                return Ok(Get());
+                if (_AmazonDbContext.categories != null)
+                {
+                    _AmazonDbContext.categories.Remove(_AmazonDbContext.categories.Find(id));
+                    int deletedId = await _AmazonDbContext.SaveChangesAsync();
+                    return deletedId >  0 ;
+                }
+                return false;
             }
-            throw new NotImplementedException();
+            catch(Exception ex ) 
+            {
+                _log.LogError(ex, $"DeleteById({id})");
+                return false;
+            }
+           
         }
 
         public async Task<IEnumerable<Category>> Get()
@@ -43,19 +56,50 @@ namespace AmazonClone.Services
             try
             {
                 return await _AmazonDbContext.categories.ToListAsync();
-            }catch(Exception ex) {
-                throw new NotImplementedException();
+            }catch(Exception ex)
+            {
+                _log.LogError(ex, $"Get()");
+                return Enumerable.Empty<Category>();
             }
         }
 
-        public Task<Category> GetById(int id)
+        public async Task<Category> GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_AmazonDbContext.categories != null)
+                {
+                    return await _AmazonDbContext.categories.FindAsync(id);
+                }
+                return null;
+            }
+            catch(Exception ex ) 
+            {
+                _log.LogError(ex, $"GetById({id})");
+                return null;
+            }
         }
-
-        public Task<IActionResult> Update(Category category)
+        public async Task<bool> Update(Category category)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_AmazonDbContext.categories != null)
+                {
+                    Category existingCategory = await _AmazonDbContext.categories.FindAsync(category.CategoryId);
+                    if (existingCategory != null)
+                    {
+                        existingCategory.CategoryName = category.CategoryName;
+                        int entries = _AmazonDbContext.SaveChanges();
+                        return entries  > 0;
+                    }
+                }
+                return false;
+            }
+            catch(Exception ex ) 
+            {
+                _log.LogError(ex, $"Update({category}");
+                return false;
+            }
         }
     }
 }

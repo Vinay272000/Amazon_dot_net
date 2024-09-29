@@ -63,3 +63,4 @@ D:\Amazon\AmazonClone\AmazonClone\obj\Debug\net6.0\refint\AmazonClone.dll
 D:\Amazon\AmazonClone\AmazonClone\obj\Debug\net6.0\AmazonClone.pdb
 D:\Amazon\AmazonClone\AmazonClone\obj\Debug\net6.0\AmazonClone.genruntimeconfig.cache
 D:\Amazon\AmazonClone\AmazonClone\obj\Debug\net6.0\ref\AmazonClone.dll
+D:\Amazon\AmazonClone\AmazonClone\bin\Debug\net6.0\AutoMapper.dll

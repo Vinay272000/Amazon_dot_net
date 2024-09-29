@@ -1,3 +1,4 @@
+using AmazonClone.AutoMappers;
 using AmazonClone.Context;
 using AmazonClone.Services;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,26 @@ builder.Services.AddDbContext<AmazonDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
+// congigure of AutoMapping.
+//builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(CategoryProfile));
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICountriesService, CountriesService>();
+builder.Services.AddScoped<IStatesService, StatesService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 var app = builder.Build();
 
-builder.Services.AddSingleton<ICategoryService, CategoryService>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -24,6 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowSpecificOrigin");
 
 app.UseHttpsRedirection();
 
